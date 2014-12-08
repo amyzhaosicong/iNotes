@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Registration</title>
 
+    <!-- page icon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 
@@ -229,7 +232,7 @@
         } else {
           $(parentID).append($('<span class="input-group-addon" id="'+icon+'"><span id="'+icon+'flagB"'+' class="glyphicon glyphicon-remove-sign"></span></span>'));
         }
-        $('#register_msg').html(xmlhttp.responseText);
+        $('#register_msg').html("inconsistant passwords");
         return true;
       }
 

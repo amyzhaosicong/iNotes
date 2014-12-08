@@ -4,9 +4,13 @@ $uname = $_POST['username'];
 $pass = $_POST['password'];
 
 include_once("connect.php");
-$sql = "SELECT * FROM users WHERE username='".$uname."' AND password='".$pass."'";
 
-$res = mysql_query($sql) or die(mysql_error());
+$db = NoteDB::Instance();
+$res = $db->user_per_id_pass($uname, $pass);
+
+/*$sql = "SELECT * FROM users WHERE username='".$uname."' AND password='".$pass."'";
+
+$res = mysql_query($sql) or die(mysql_error());*/
 
 $id = "";
 while ($row = mysql_fetch_assoc($res)) {

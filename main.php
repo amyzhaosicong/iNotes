@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>category_list</title>
 
+    <!-- page icon -->
+    <link rel="shortcut icon" href="favicon.ico">
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 
@@ -48,8 +50,8 @@
 					}
 
 					include_once("connect.php");
-					$sql = "SELECT * FROM categories WHERE user_id=".$uid." ORDER BY category_title ASC";
-					$res = mysql_query($sql) or die(mysql_error());
+					$db = NoteDB::Instance();
+					$res = $db->category_per_user($uid);
 
 					$categories = "";
 

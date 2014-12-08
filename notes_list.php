@@ -22,14 +22,19 @@
 			}
 
 			include_once("connect.php");
-			$sql = "SELECT * FROM categories WHERE user_id=".$uid." ORDER BY category_title ASC";
-			$res = mysql_query($sql) or die(mysql_error());
+
+			$db = NoteDB::Instance();
+			$res = $db->category_per_user($uid);
+
+			/*$sql = "SELECT * FROM categories WHERE user_id=".$uid." ORDER BY category_title ASC";
+			$res = mysql_query($sql) or die(mysql_error());*/
 
 			if (isset($_GET['category_id'])) {
 				$category_id = (int)$_GET['category_id'];
 			} else {
 				$category_id = -1; //for empty results
-				$res = mysql_query($sql) or die(mysql_error());
+				/*$res = mysql_query($sql) or die(mysql_error());*/
+				$res = $db->category_per_user($uid);
 				while ($row = mysql_fetch_assoc($res)) {
 					$category_id = (int) $row['id'];
 					break;
@@ -44,7 +49,8 @@
                     <h1>
                     	<?php
                     		$category_title = "Notes Titles to be Listed";
-                    		$res = mysql_query($sql) or die(mysql_error());
+                    		/*$res = mysql_query($sql) or die(mysql_error());*/
+                    		$res = $db->category_per_user($uid);
                     		while ($row = mysql_fetch_assoc($res)) {
 								$id = (int) $row['id'];
 								if ($category_id == $id) {
@@ -66,13 +72,18 @@
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 						<?php
 							$_SESSIO['category_id'] = $category_id;
-							$sql = "SELECT * FROM notes WHERE category_id=".$category_id." ORDER BY title ASC";
+							/*$sql = "SELECT * FROM notes WHERE category_id=".$category_id." ORDER BY title ASC";*/
+							
+							$db = NoteDB::Instance();
+							$res = $db->notes_per_category($category_id);
 
 							if (isset($_SESSION['search_word'])) {
-								$sql = "SELECT * FROM `notes` n, `categories` c WHERE n.category_id = c.id AND c.user_id = ".$uid;
+								$db = NoteDB::Instance();
+								$res = $db->notes_per_user($uid);
+								/*$sql = "SELECT * FROM `notes` n, `categories` c WHERE n.category_id = c.id AND c.user_id = ".$uid;*/
 							}
 
-							$res = mysql_query($sql) or die(mysql_error());
+							/*$res = mysql_query($sql) or die(mysql_error());*/
 							$notes = "";
 
 							$tmp = "";
@@ -143,17 +154,25 @@
 							echo $notes;
 							echo $tmp;
 
-							if (isset($_SESSION['search_word'])) {
-								unset($_SESSION['search_word']);
-							}
+							
 						?>
 
 
 					  
 					</div>
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-                    <a href="#noteCreateModal" class="btn btn-success" data-toggle="modal"  data-target="#noteCreateModal">Create Note</a>
-                    <a href="category_delete_parse.php?id=<?php echo $category_id ?>" class="btn btn-danger" >Delete Subject</a>
+
+                    <?php
+                    	if (!isset($_SESSION['search_word'])) {
+                    		echo "<a href=\"#noteCreateModal\" class=\"btn btn-success\" data-toggle=\"modal\"  data-target=\"#noteCreateModal\">Create Note</a>";
+                    		echo "<a href=\"category_delete_parse.php?id=".$category_id."\" class=\"btn btn-danger\" >Delete Subject</a>";
+                    
+                    	}
+                    
+	                    if (isset($_SESSION['search_word'])) {
+							unset($_SESSION['search_word']);
+						}
+					?>
 
 					<!-- Create Note Modal -->
 					<div class="modal fade" id="noteCreateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

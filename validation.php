@@ -11,8 +11,10 @@
 	// Check Valid or Invalid user name when user enters user name in username input field.
 	if ($formfield == "username") {
 		include_once("connect.php");
-		$sql = "SELECT * FROM users WHERE username='".$value."'";
-		$res = mysql_query($sql) or die(mysql_error());
+		$$db = NoteDB::Instance();
+		$res = $db->user_per_username($value);
+		/*$sql = "SELECT * FROM users WHERE username='".$value."'";
+		$res = mysql_query($sql) or die(mysql_error());*/
 		if (mysql_num_rows($res) > 0) {
 			$msg = "user exists";
 			exit($msg);

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2014 at 10:55 PM
+-- Generation Time: Dec 08, 2014 at 02:13 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `category_description` varchar(255) DEFAULT NULL,
   `last_post_date` datetime DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `categories`
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `notes` (
   `title` text,
   `date` datetime DEFAULT NULL,
   `category_id` tinyint(4) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `notes`
@@ -75,12 +75,10 @@ INSERT INTO `notes` (`id`, `content`, `title`, `date`, `category_id`) VALUES
 (6, 'The normal forms (abbrev. NF) of relational database theory provide criteria for determining a table''s degree of immunity against logical inconsistencies and anomalies. The higher the normal form applicable to a table, the less vulnerable it is. Each table has a "highest normal form" (HNF): by definition, a table always meets the requirements of its HNF and of all normal forms lower than its HNF; also by definition, a table fails to meet the requirements of any normal form higher than its HNF.\r\n\r\nThe normal forms are applicable to individual tables; to say that an entire database is in normal form n is to say that all of its tables are in normal form n.\r\n\r\nNewcomers to database design sometimes suppose that normalization proceeds in an iterative fashion, i.e. a 1NF design is first normalized to 2NF, then to 3NF, and so on. This is not an accurate description of how normalization typically works. A sensibly designed table is likely to be in 3NF on the first attempt; furthermore, if it is 3NF, it is overwhelmingly likely to have an HNF of 5NF. Achieving the "higher" normal forms (above 3NF) does not usually require an extra expenditure of effort on the part of the designer, because 3NF tables usually need no modification to meet the requirements of these higher normal forms.\r\n\r\nThe main normal forms are summarized below.\r\n', 'Normal Forms', '2014-12-16 00:00:00', 1),
 (7, 'The main purpose of C++ programming is to add object orientation to the C programming language and classes are the central feature of C++ that supports object-oriented programming and are often called user-defined types.\r\n\r\nA class is used to specify the form of an object and it combines data representation and methods for manipulating that data into one neat package. The data and functions within a class are called members of the class.\r\n', 'C++ Classes', '2014-12-16 00:00:00', 4),
 (8, 'In earlier chapters, variables have been explained as locations in the computer''s memory which can be accessed by their identifier (their name). This way, the program does not need to care about the physical address of the data in memory; it simply uses the identifier whenever it needs to refer to the variable.\r\n\r\nFor a C++ program, the memory of a computer is like a succession of memory cells, each one byte in size, and each with a unique address. These single-byte memory cells are ordered in a way that allows data representations larger than one byte to occupy memory cells that have consecutive addresses.\r\n\r\nThis way, each cell can be easily located in the memory by means of its unique address. For example, the memory cell with the address 1776 always follows immediately after the cell with address 1775 and precedes the one with 1777, and is exactly one thousand cells after 776 and exactly one thousand cells before 2776.\r\n', 'Pointers and Arrays', '2014-12-23 00:00:00', 4),
-(9, 'An integration test has the target to test the behavior of a component or the integration between a set of components. The term functional test is sometimes used as synonym for integration test.\r\n\r\nThis kind of tests allow you to translate your user stories into a test suite, i.e., the test would resemble an expected user interaction with the application.\r\n', 'Unit Testing', '2014-12-10 00:00:00', 3),
+(9, 'An integration test has the target to test the behavior of a component or the integration between a set of components. The term functional test is sometimes used as synonym for integration test.\r\n\r\nThis kind of tests allow you to translate your user stories into a test suite, i.e., the test would resemble an expected user interaction with the application.', 'Unit Testing', '2014-12-10 00:00:00', 3),
 (10, 'Scrum is an iterative and incremental agile software development framework for managing product development. It defines "a flexible, holistic product development strategy where a development team works as a unit to reach a common goal", challenges assumptions of the "traditional, sequential approach" to product development, and enables teams to self-organize by encouraging physical co-location or close online collaboration of all team members, as well as daily face-to-face communication among all team members and disciplines in the project.\r\n', 'Scrum Method', '2014-12-24 00:00:00', 3),
 (11, 'week 1 class 1', 'calculus note 1', NULL, 7),
-(12, 'week 1 class 2', 'calculus note 2', NULL, 7),
-(14, 'tttt', 'ttt', NULL, 12),
-(15, 'asdfasdfs', 'sadfasfd', NULL, 13);
+(12, 'week 1 class 2', 'calculus note 2', NULL, 7);
 
 -- --------------------------------------------------------
 
@@ -156,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `users`
@@ -164,7 +162,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`) VALUES
 (1, 'test', 'test', 'test@rpi.edu'),
-(2, 'tli5', 'Adsltr965', 'tli5@slu.edu');
+(2, 'tli5', 'Adsltr965', 'tli5@slu.edu'),
+(3, 'jedi', 'jediphp', 'jedi@rpi.edu');
 
 --
 -- Indexes for dumped tables
@@ -208,12 +207,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `notes`
 --
 ALTER TABLE `notes`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `posts`
 --
@@ -228,7 +227,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

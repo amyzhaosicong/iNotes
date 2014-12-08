@@ -6,9 +6,12 @@ $title = $_POST['title'];
 $content = $_POST['content'];
 
 include_once("connect.php");
-$sql = "INSERT INTO notes (content, title, category_id) VALUES ('".$content."', '".$title."', '".$category_id."')";
+$db = NoteDB::Instance();
+$res = $db->note_create($content, $title, $category_id);
 
-$res = mysql_query($sql) or die(mysql_error());
+/*$sql = "INSERT INTO notes (content, title, category_id) VALUES ('".$content."', '".$title."', '".$category_id."')";
+
+$res = mysql_query($sql) or die(mysql_error());*/
 header("Location: main.php");
 
 ?>
